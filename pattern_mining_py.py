@@ -1,9 +1,4 @@
 # ============================================
-# STEP 1: Buat semua file yang diperlukan untuk deploy
-# ============================================
-
-dashboard_code = '''
-# ============================================
 # DASHBOARD ANALISIS POLA KANDUNGAN GIZI
 # TUGAS BESAR PENAMBANGAN DATA
 # ============================================
@@ -82,7 +77,6 @@ with st.sidebar:
 
         # ================== PREPROCESSING ==================
         # Ambil kolom yang relevan - Sesuaikan dengan nama kolom di CSV-mu!
-        # Jika kolom berbeda, sesuaikan di sini
         cols = ['energy_kcal', 'protein_g', 'fat_g', 'carbohydrate_g', 'sodium_mg', 'fiber_g']
 
         # Jika kolom tidak ditemukan, gunakan mapping alternatif
@@ -91,7 +85,6 @@ with st.sidebar:
             if col in df.columns:
                 available_cols.append(col)
             elif col == 'energy_kcal' and 'energy_kcal' not in df.columns:
-                # Cari alternatif nama kolom
                 for alt in ['calories', 'Energi']:
                     if alt in df.columns:
                         available_cols.append(alt)
@@ -278,7 +271,6 @@ if uploaded_file is not None:
         with col1:
             st.subheader("Kalori vs Kategori Lemak")
             df_plot = df_gizi.copy()
-            # Gunakan kolom yang benar
             if 'fat_g' in df_disc.columns:
                 df_plot['Lemak'] = df_disc['fat_g']
                 fig4 = px.box(
@@ -373,54 +365,3 @@ else:
 
 st.markdown("---")
 st.caption("Dibuat untuk Tugas Besar Penambangan Data | Telkom University Surabaya 2026")
-'''
-
-with open('dashboard_gizi.py', 'w') as f:
-    f.write(dashboard_code)
-
-print("✅ dashboard_gizi.py berhasil dibuat")
-
-# 2. Buat file requirements.txt
-requirements = """
-streamlit
-pandas
-numpy
-matplotlib
-seaborn
-mlxtend
-plotly
-"""
-
-with open('requirements.txt', 'w') as f:
-    f.write(requirements)
-
-print("✅ requirements.txt berhasil dibuat")
-
-# 3. Buat file .gitignore
-gitignore = """
-__pycache__/
-*.pyc
-.DS_Store
-*.csv
-*.png
-*.xlsx
-*.zip
-*.pyc
-.env
-.venv
-venv/
-"""
-
-with open('.gitignore', 'w') as f:
-    f.write(gitignore)
-
-print("✅ .gitignore berhasil dibuat")
-
-# 4. Download file yang sudah dibuat ke komputer lokal
-from google.colab import files
-
-files.download('dashboard_gizi.py')
-files.download('requirements.txt')
-files.download('.gitignore')
-
-print("✅ Semua file siap! File sudah diunduh ke komputer.")
