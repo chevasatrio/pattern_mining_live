@@ -5,7 +5,7 @@
 import json  # Add this import if needed, though your code doesn't use json directly yet
 
 # 1. Buat file dashboard_gizi.py (COPY SELURUH KODE DASHBOARD-MU)
-dashboard_code = \"\"\"
+dashboard_code = """
 # ============================================
 # DASHBOARD ANALISIS POLA KANDUNGAN GIZI
 # TUGAS BESAR PENAMBANGAN DATA
